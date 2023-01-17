@@ -37,6 +37,10 @@ contract SimpleStorage {
 // bytes32 is the maximum value the bytes can be.
 
 // Continue from 2:17:21
+// Add a layout to README file explaining the process of making the smart contract work.
+// i.e. 1. Open Remix IDE at www....com
+//      2. Compile the file
+//      3. etc.
 
 
 }
