@@ -37,29 +37,85 @@ contract SimpleStorage {
 // bytes32 is the maximum value the bytes can be.
 // Check Solidity Documentation for an extensive list of types: https://docs.soliditylang.org/en/latest/types.html
 
-    uint256 public favoriteNumber; // If you just say uint256 favoriteNumber; without giving a value, it will have the default value which, in Solidity, is 0.
-    // By changing the favoriteNumber visibility to "public" we can actually see the variable once compiled.
+    uint256 favoriteNumber; // If you just say uint256 favoriteNumber; without giving a value, it will have the default value which, in Solidity, is 0.
+    // By changing the favoriteNumber visibility to "public" like "uint256 public favoriteNumber;" we can actually see the variable once compiled.
+
+    struct People { // This way we created a new type called "People", just like uint256 or string.
+        uint256 favoriteNumber;
+        string name;
+    }
+
+    People[] public people; // [] mean that People is an array.  
+    // An array is a data structure that holds a list of other types. It is a way to store a list or a sequence of objects.
+    // [] <- This array is known as a dynamic array because the size of the array is not given.
+    // If we were to give it a value of [3] that mist that the list could only contain 3 values.
+    // Because [] has no value, that means that this array can grow and shrink as we add or abstract more data to it.
+
+    // Now what if we know someone's name but we don't know their favorite number?
+    // One way would be to individually look through the whole array to find their favorite number; but that would be time consuming.
+    // Another data structure that we can use to access this information is called "mapping".
+    // Mapping is a data structure where a key is "mapped" to a single value.
+    // An easy way to think of it is as a dictionary.
+    mapping(string => uint256) public nameToFavoriteNumber;
+    // This way, we now have a dictionary where every single name is going to map to a specific number.
+
     function store(uint256 _favoriteNumber) public { 
         // store: function that changes the number to some new value. The value will change to whatever value we pass threw it.
         // In this case we are allowing our store function to take a variable of type uint256 called _favoriteNumber, making the function public.
         favoriteNumber = _favoriteNumber; // This way we are setting favoriteNumber value to whatever _favoriteNumber variable we have passed.
     }
 
-// "Functions" or "Methods" are self-contained modules that will execute some specifit set of instructions, when we call them.
-// Functions can be identified by the keyword "function".
-// Functions and variables can have one of four Function Visibility Identifiers:
-// public: Visible externally and internally, meaning that anybody who interacts with this contract or sees this contract can see what's stored in this function.
-// private: Only visible in the current contract.
-// external: Only visible externally, meaning somebody outside this contract can call this function.
-// internal: Only visible internally, meaning that only this contract and its children contract can read this function.
-// When we don't give a visibility specifier to our function, then it automatically gets deployed as internal.
+    // "Functions" or "Methods" are self-contained modules that will execute some specifit set of instructions, when we call them.
+    // Functions can be identified by the keyword "function".
+    // Functions and variables can have one of four Function Visibility Identifiers:
+    // public: Visible externally and internally, meaning that anybody who interacts with this contract or sees this contract can see what's stored in this function.
+    // private: Only visible in the current contract.
+    // external: Only visible externally, meaning somebody outside this contract can call this function.
+    // internal: Only visible internally, meaning that only this contract and its children contract can read this function.
+    // When we don't give a visibility specifier to our function, then it automatically gets deployed as internal.
+  
+    function retrieve() public view returns (uint256){
+        return favoriteNumber;
+    }
+    // There are two keywords in Solidity that notate a function that doesn't actually need to spend gas to run.
+    // Those keywords are "view" and "pure".
+    // view: Means that we are just going to read the state of this contract
+    // Of note: If a retrieve function like "view" or "pure" are called within a function that costs money, they as well will cost money, because they are reading from the blockchain.
+
+    function addPerson(string memory _name, uint256 _favoriteNumber) public {
+        people.push(People(_favoriteNumber, _name));
+        nameToFavoriteNumber[_name] = _favoriteNumber; // Serves as a capability to the addPerson function.
+    }
+    // People is capitalised and because of that we know it is refering to the struct "People" and not the array "people".
+    // people.push <- Push is the equivalent of adding.
+
+
+}
+
+// NOTES On Solidity Memory, Storage, & Calldata
+
+// There are six places that you can store data is Solidity:
+// 1. Stack
+// 2. Memory
+// 3. Storage
+// 4. Calldata
+// 5. Code
+// 6. Logs
+// (Of note: Even though there are six places where we can access and store information, we cannot say a variable is stack, code, or logs. We can only say memory, storage, or calldata.
+
+// In this instance we are going to mainly focus on explaining calldata, memory and storage.
+// Calldata and memory mean that the data is only going to exist temporarily.
+// Storage variables exist event outside of just the function executing.
+// Calldata is temporary variables that cannot be modified.
+// Memory is temporary variables that can be modified.
+// Storage is permanent variables that can be modified.
+
+// The reason we are using memory next to string but not next to uint256, is because solidity knows that the uint256 will be stored in memory.
+// On the other hand, a string is actually an array of bytes. And since string is an array, we need to add "memory" to it, because we need to tell Solidity the data location of arrays, structs, or mappings.
+
 
 
 // Add a layout to README file explaining the process of making the smart contract work.
 // i.e. 1. Open Remix IDE at www....com
 //      2. Compile the file
 //      3. etc.
-
-}
-
-
