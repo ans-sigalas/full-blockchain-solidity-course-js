@@ -35,13 +35,30 @@ contract SimpleStorage {
 //      bytes32 favoriteBytes = "cat";
 // Interestingly, strings are secretly just bytes objects but only for text.
 // bytes32 is the maximum value the bytes can be.
+// Check Solidity Documentation for an extensive list of types: https://docs.soliditylang.org/en/latest/types.html
 
-// Continue from 2:17:21
+    uint256 public favoriteNumber; // If you just say uint256 favoriteNumber; without giving a value, it will have the default value which, in Solidity, is 0.
+    // By changing the favoriteNumber visibility to "public" we can actually see the variable once compiled.
+    function store(uint256 _favoriteNumber) public { 
+        // store: function that changes the number to some new value. The value will change to whatever value we pass threw it.
+        // In this case we are allowing our store function to take a variable of type uint256 called _favoriteNumber, making the function public.
+        favoriteNumber = _favoriteNumber; // This way we are setting favoriteNumber value to whatever _favoriteNumber variable we have passed.
+    }
+
+// "Functions" or "Methods" are self-contained modules that will execute some specifit set of instructions, when we call them.
+// Functions can be identified by the keyword "function".
+// Functions and variables can have one of four Function Visibility Identifiers:
+// public: Visible externally and internally, meaning that anybody who interacts with this contract or sees this contract can see what's stored in this function.
+// private: Only visible in the current contract.
+// external: Only visible externally, meaning somebody outside this contract can call this function.
+// internal: Only visible internally, meaning that only this contract and its children contract can read this function.
+// When we don't give a visibility specifier to our function, then it automatically gets deployed as internal.
+
+
 // Add a layout to README file explaining the process of making the smart contract work.
 // i.e. 1. Open Remix IDE at www....com
 //      2. Compile the file
 //      3. etc.
-
 
 }
 
