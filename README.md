@@ -5,7 +5,7 @@ This is a repository for the aforementioned course on Blockchain & Solidity, usi
 <b>Lessons</b> of this course include the following:
 <ul>
   <li>Lesson 1: Blockchain Basics
-  <li>Lesson 2: Welcome to Remix! Simple Storage
+  <li><a href="https://github.com/ans-sigalas/full-blockchain-solidity-course-js/tree/main/lesson-2">Lesson 2: Welcome to Remix! Simple Storage</a>
   <li>Lesson 3: Remix Storage Factory
   <li>Lesson 4: Remix Fund Me
   <li>Lesson 5: Ethers.js Simple Storage
