@@ -113,9 +113,9 @@ contract SimpleStorage {
 // The reason we are using memory next to string but not next to uint256, is because solidity knows that the uint256 will be stored in memory.
 // On the other hand, a string is actually an array of bytes. And since string is an array, we need to add "memory" to it, because we need to tell Solidity the data location of arrays, structs, or mappings.
 
+// ---
 
-
-// Add a layout to README file explaining the process of making the smart contract work.
-// i.e. 1. Open Remix IDE at www....com
-//      2. Compile the file
-//      3. etc.
+// EVM = Ethereum Virtual Machine
+// The Ethereum Virtual Machine, or EVM, serves as a 'virtual computer' or software platform utilized by developers for creating decentralized applications.
+// EVM could also help in executing and deploying smart contracts on the Ethereum blockchain.
+// Some other EVM compatible blockchains are Avalanche, Fantom, Polygon and Arbitrum.
