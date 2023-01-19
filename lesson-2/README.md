@@ -5,7 +5,7 @@ Writing and deploying our first smart contract using Remix IDE. We first deploye
 <br>
 <b>Functionality</b>
 
-Create a simple storage smart contract named "Simple Storage" where it has three functionalities:
+Create a simple storage smart contract named "<a href="https://github.com/ans-sigalas/full-blockchain-solidity-course-js/blob/main/lesson-2/SimpleStorage.sol">SimpleStorage.sol</a>" where it has three functionalities:
 <ol>
 <li>Input, store and retrieve our favorite number.
 <li>Input the name and favorite number of a person and retrieve by inputing a key number (list number starting from 0).
