@@ -48,7 +48,7 @@ contract SimpleStorage {
     People[] public people; // [] mean that People is an array.  
     // An array is a data structure that holds a list of other types. It is a way to store a list or a sequence of objects.
     // [] <- This array is known as a dynamic array because the size of the array is not given.
-    // If we were to give it a value of [3] that mist that the list could only contain 3 values.
+    // If we were to give it a value of [3] that means that the list could only contain 3 values.
     // Because [] has no value, that means that this array can grow and shrink as we add or abstract more data to it.
 
     // Now what if we know someone's name but we don't know their favorite number?
