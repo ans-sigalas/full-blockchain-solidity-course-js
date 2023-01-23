@@ -1,11 +1,29 @@
-<b>Lesson 3</b>
+<b>Lesson 4</b>
 
-Info to be added
+Info to be added.
 
 <br>
 <b>Functionality</b>
 
-Info to be added
+For this lesson we were working with three different contracts with the following functionalities:
+<ol>
+<li><a href="https://github.com/ans-sigalas/full-blockchain-solidity-course-js/blob/main/lesson-4/FundMe.sol">FundMe.sol</a>
+<ul>
+<li>Allow people to fund collective goods.
+<li>
+<li>
+<li>
+<li>
+</ul>
+<li><a href="https://github.com/ans-sigalas/full-blockchain-solidity-course-js/blob/main/lesson-4/PriceConverter.sol">PriceConverter.sol</a>
+<ul>
+<li>
+<li>
+<li>
+<li>
+</ul>
+</ol>
+
 
 <br>
 <b>Tools</b>
