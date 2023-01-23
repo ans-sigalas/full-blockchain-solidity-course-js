@@ -11,7 +11,7 @@ import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 
 contract FundMe {
 
-    uint256 public minimumUsd = 50;
+    uint256 public minimumUsd = 50 * 1e18; // 50 and 18 decimal places
 
     function fund() public payable { // This function is for people to send money to.
         // Just like wallet can hold funds, contract addresses can hold funds as well
@@ -47,15 +47,18 @@ contract FundMe {
         // We can do that by adding unit256 next to price and wrap the type into brackets.
     }
 
-    function getConversionRate() public {
+    function getConversionRate(uint256 ethAmount) public view returns (uint256) { 
+        // With this function we are going to get a parameter of uint256 named ethAmount which is gonna return a uint256.
+        // Which means we are going to pass it an ethAmount as uint256 and it is going to return a USD amount as uint256.
+        uint256 ethPrice = getPrice();
+        uint256 ethAmountInUsd = (ethPrice * ethAmount) / 1e18; // Because both ethPrice and ethAmount have each 18 zeros, we need to divide by 1e18. Otherwise, we are going to end up with 36 zeros.
+        return ethAmountInUsd;
 
     }
 
    // function withdraw(){
 
   //  } // for the owner of the contract to be able to withdraw the fudns.
-  
-  // Need to continue from 4:15:21
 
 
 
