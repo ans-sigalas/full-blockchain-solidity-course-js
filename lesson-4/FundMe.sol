@@ -14,7 +14,7 @@ contract FundMe {
     uint256 public minimumUsd = 50 * 1e18; // 50 and 18 decimal places
 
     // Because we want to keep track of all the people that sent us money, we need to create some data structures.
-    
+    address[] public funders; // Array of addresses called funders to add all the funders that send money to us.
 
     function fund() public payable { // This function is for people to send money to.
         // Just like wallet can hold funds, contract addresses can hold funds as well
@@ -26,6 +26,9 @@ contract FundMe {
                                     // Reverting means that undos any action that happened and sends the REMAINING gas back.
                                     // On msg.value the value is in terms of Ethereum. In order to convert it to usd we need to use an Oracle.
                                     // He had to add the function getConversionRate to make sure we send enough msg.value.
+        funders.push(msg.sender);   // Any time someone sends money and it goes through, we add the funder on the list.
+                                    // msg.sender is the address of whoever called the fund function in this case.
+                                    // Like msg.value, msg.sender is an always available global keyword.
     } 
 
     // In order to get the price of the Layer 1 blockchain that we are working with (in this case is Ethereum).
