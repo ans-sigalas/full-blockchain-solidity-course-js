@@ -5,7 +5,7 @@ Info to be added. (Allow people to fund collective goods.)
 <br>
 <b>Functionality</b>
 
-For this lesson we were working with three different contracts with the following functionalities:
+For this lesson we were working with a contract named FundMe.sol and a library named PriceConverter.sol, with the following functionalities:
 <ol>
 <li><a href="https://github.com/ans-sigalas/full-blockchain-solidity-course-js/blob/main/lesson-4/FundMe.sol">FundMe.sol</a>
 <ul>
@@ -15,7 +15,7 @@ For this lesson we were working with three different contracts with the followin
 </ul>
 <li><a href="https://github.com/ans-sigalas/full-blockchain-solidity-course-js/blob/main/lesson-4/PriceConverter.sol">PriceConverter.sol</a>
 <ul>
-<li>
+<li>This was used as a library for our functions.
 <li>
 <li>
 <li>
@@ -30,4 +30,5 @@ For this lesson we were working with three different contracts with the followin
 <li>Remix IDE
 <li>Solidity
 <li>EVM
+<li>Chainlink Oracle Network
 </ul>
