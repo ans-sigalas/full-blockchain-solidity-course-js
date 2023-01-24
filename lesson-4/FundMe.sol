@@ -4,12 +4,15 @@ pragma solidity ^0.8.8;
 
 // We import this contract using the NPM address which can be found here: https://www.npmjs.com/package/@chainlink/contracts
 // Which takes the contract from the github repository of chainlink here: https://github.com/smartcontractkit/chainlink/blob/develop/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol
-import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
+// import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol"; // Originally part of the contract but now pasted onto the PriceConverter.sol library.
 // The above contract is what's called an "Interface" which will give us the ABI. 
 // The ABI is just a list of different functions included on this contract that we can use on our contract.
 
+import "./PriceConverter.sol";
 
 contract FundMe {
+
+    using PriceConverter for uint256; // We tell the FundMe contract what are we using the PriceConverter library for.
 
     uint256 public minimumUsd = 50 * 1e18; // 50 and 18 decimal places
 
@@ -20,7 +23,11 @@ contract FundMe {
 
     function fund() public payable { // This function is for people to send money to.
         // Just like wallet can hold funds, contract addresses can hold funds as well
-        require(getConversionRate(msg.value) >= minimumUsd, "You need to send at least 1 Eth!");  // To get how much value someome is sending we use msg.value. 
+        require(msg.value.getConversionRate() >= minimumUsd, "You need to send at least 1 Eth!"); 
+                                    // We are not passing a variable inside our (), even though on our library, the getConversionRate function is expecting a uint256.
+                                    // The reason is that the msg.value is considered the first parameter for any of these library functions.
+                                    // If we wanted another variable inside our getConversionRate library function e.g. getConversionRate(uint256 ethAmount, uint256 somethingElse), then we should have passed something inside the () e.g. (123).
+        // BEFORE LIBRARY: require(getConversionRate(msg.value) >= minimumUsd, "You need to send at least 1 Eth!");  // To get how much value someome is sending we use msg.value. 
                                     // To ask for a specific amount we use require.
                                     // require(msg.value >= 1e18, "You need to send at least 1 Eth!");
                                     // 1e18 == 1 * 10 ** 18 == 1000000000000000000 (**=raised to) - 1e18 Wei is equal to 1 Eth
@@ -34,7 +41,7 @@ contract FundMe {
         addressToAmountFunded[msg.sender] = msg.value; // Add to mapping.
     } 
 
-    // In order to get the price of the Layer 1 blockchain that we are working with (in this case is Ethereum).
+/*  // In order to get the price of the Layer 1 blockchain that we are working with (in this case is Ethereum).
     // In order to get the price we need to use the Chainlink Data Feeds.
     // Since this is an instance that we want to interact with a contract outside of our project, we are going to need two things:
     // ABI
@@ -71,6 +78,8 @@ contract FundMe {
 
     }
 
+    NOTE: Everything inside the / * * / comment was originally part of this contract before we created the PriceConverter.sol library.
+*/
    // function withdraw(){
 
   //  } // for the owner of the contract to be able to withdraw the fudns.
