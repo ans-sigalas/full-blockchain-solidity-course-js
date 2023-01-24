@@ -13,15 +13,19 @@ contract FundMe {
 
     uint256 public minimumUsd = 50 * 1e18; // 50 and 18 decimal places
 
+    // Because we want to keep track of all the people that sent us money, we need to create some data structures.
+    
+
     function fund() public payable { // This function is for people to send money to.
         // Just like wallet can hold funds, contract addresses can hold funds as well
-        require(msg.value >= minimumUsd, "You need to send at least 1 Eth!");  // To get how much value someome is sending we use msg.value. 
+        require(getConversionRate(msg.value) >= minimumUsd, "You need to send at least 1 Eth!");  // To get how much value someome is sending we use msg.value. 
                                     // To ask for a specific amount we use require.
                                     // require(msg.value >= 1e18, "You need to send at least 1 Eth!");
                                     // 1e18 == 1 * 10 ** 18 == 1000000000000000000 (**=raised to) - 1e18 Wei is equal to 1 Eth
                                     // The above statement means "If the require is not met then revert to this message".
                                     // Reverting means that undos any action that happened and sends the REMAINING gas back.
                                     // On msg.value the value is in terms of Ethereum. In order to convert it to usd we need to use an Oracle.
+                                    // He had to add the function getConversionRate to make sure we send enough msg.value.
     } 
 
     // In order to get the price of the Layer 1 blockchain that we are working with (in this case is Ethereum).
@@ -45,6 +49,11 @@ contract FundMe {
         return uint256(price * 1e10); // 1**10 == 10000000000, which is 10 decimal places.
         // msg.value is a uint256 but the price is an int256. For that we have to convert the int256 to a uint256 through what is called "typecasting".
         // We can do that by adding unit256 next to price and wrap the type into brackets.
+    }
+
+    function getVersion() public view returns (uint256) { // To show us the version of the priceFeed
+        AggregatorV3Interface priceFeed = AggregatorV3Interface(0xD4a33860578De61DBAbDc8BFdb98FD742fA7028e);
+        return priceFeed.version();
     }
 
     function getConversionRate(uint256 ethAmount) public view returns (uint256) { 
