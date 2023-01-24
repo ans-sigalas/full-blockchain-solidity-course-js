@@ -16,6 +16,8 @@ contract FundMe {
     // Because we want to keep track of all the people that sent us money, we need to create some data structures.
     address[] public funders; // Array of addresses called funders to add all the funders that send money to us.
 
+    mapping(address => uint256) public addressToAmountFunded; // Mapping of addresses and how much money they actually sent.
+
     function fund() public payable { // This function is for people to send money to.
         // Just like wallet can hold funds, contract addresses can hold funds as well
         require(getConversionRate(msg.value) >= minimumUsd, "You need to send at least 1 Eth!");  // To get how much value someome is sending we use msg.value. 
@@ -29,6 +31,7 @@ contract FundMe {
         funders.push(msg.sender);   // Any time someone sends money and it goes through, we add the funder on the list.
                                     // msg.sender is the address of whoever called the fund function in this case.
                                     // Like msg.value, msg.sender is an always available global keyword.
+        addressToAmountFunded[msg.sender] = msg.value; // Add to mapping.
     } 
 
     // In order to get the price of the Layer 1 blockchain that we are working with (in this case is Ethereum).
