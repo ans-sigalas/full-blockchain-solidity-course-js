@@ -35,8 +35,6 @@ contract FundMe {
         owner = msg.sender; // The msg.sender of the construction function is going to be whoever has deployed the contract.
     }
 
-
-
     function fund() public payable { // This function is for people to send money to.
         // Just like wallet can hold funds, contract addresses can hold funds as well
         require(msg.value.getConversionRate() >= minimumUsd, "You need to send at least 1 Eth!"); 
@@ -97,6 +95,10 @@ contract FundMe {
     NOTE: Everything inside the / * * / comment was originally part of this contract before we created the PriceConverter.sol library.
 */
     function withdraw() public { // for the owner of the contract to be able to withdraw the fudns.
+        require(msg.sender == owner, "Sender is not the owner of this contract!"); // This line, we added it as a parameter to define who can call the withdraw function.
+                                      // So this will require the msg.sender to be the owner, otherwise it will return an error message.
+                                      // Of note: Double == is a checker. Meaning that owner = msg.sender we say that the first is equal to the second whereas with double == we would check if they were equal to each other.
+
         // Since we are going to be withdrawing all the funds out of this contract, we would need to reset our funders Array and our addressToAmountFunded.
         // To do that we will be using something called "for loop".
         // A for loop is a way to loop through some type of index object or loop through some range of numbers or just do a task a certain amount of times, repeating.
