@@ -23,7 +23,7 @@ contract FundMe {
 
     // With our withdraw function, anyone could withdraw the funds from our contract.
     // We need to set this up so that the withdraw function can only be called by the owner of this contract.
-    // To do that we have to set-up a couple new "functions": constructor
+    // To do that we have to set-up a couple new "functions": constructor and modifier.
     // When we deploy this contract, we want to set it up so that whoever deploys the contract is automatically going to be the owner of this contract.
     // We could have used a new function to be executed once the contract is deployed but then we will have to pay for two transactions.
     // Instead, Solidity has something called a constructor.
@@ -94,10 +94,11 @@ contract FundMe {
 
     NOTE: Everything inside the / * * / comment was originally part of this contract before we created the PriceConverter.sol library.
 */
-    function withdraw() public { // for the owner of the contract to be able to withdraw the fudns.
-        require(msg.sender == owner, "Sender is not the owner of this contract!"); // This line, we added it as a parameter to define who can call the withdraw function.
+    function withdraw() public onlyOwner { // for the owner of the contract to be able to withdraw the fudns.
+        // require(msg.sender == owner, "Sender is not the owner of this contract!"); // This line, we added it as a parameter to define who can call the withdraw function.
                                       // So this will require the msg.sender to be the owner, otherwise it will return an error message.
                                       // Of note: Double == is a checker. Meaning that owner = msg.sender we say that the first is equal to the second whereas with double == we would check if they were equal to each other.
+                                      // This require could have been used in this instance but we decided to use modifiers (see line 159).
 
         // Since we are going to be withdrawing all the funds out of this contract, we would need to reset our funders Array and our addressToAmountFunded.
         // To do that we will be using something called "for loop".
@@ -151,5 +152,15 @@ contract FundMe {
         (bool callSuccess, ) = payable(msg.sender).call{value: address(this).balance}("");
         require(callSuccess, "Call failed");
     }
+    
+    // For this instance we assumed that are lots of functions that are going to be required to be called by the contract owner.
+    // Instead of copying and pasting the function on line 98 to every function, we created a modifier which will be a key word that we can include on the first line of each function (see line 97).
+    
+    modifier onlyOwner {
+        require(msg.sender == owner, "Sender is not the owner of this contract!");
+        _;
+    }
+    // With this modifier what we are saying is that before you execute the withdraw function for example, go to the onlyOwner modifier and first execute whatever is in there.
+    // _; <-- This represents the rest of our code within this function.
 
 }
