@@ -21,10 +21,6 @@ contract FundMe {
 
     mapping(address => uint256) public addressToAmountFunded; // Mapping of addresses and how much money they actually sent.
 
-
-
-
-
     function fund() public payable { // This function is for people to send money to.
         // Just like wallet can hold funds, contract addresses can hold funds as well
         require(msg.value.getConversionRate() >= minimumUsd, "You need to send at least 1 Eth!"); 
