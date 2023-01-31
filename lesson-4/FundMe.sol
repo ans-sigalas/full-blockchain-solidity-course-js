@@ -8,7 +8,7 @@ pragma solidity ^0.8.8;
 // The above contract is what's called an "Interface" which will give us the ABI. 
 // The ABI is just a list of different functions included on this contract that we can use on our contract.
 
-import "./PriceConverter.sol";
+import "https://github.com/ans-sigalas/full-blockchain-solidity-course-js/blob/main/lesson-4/PriceConverter.sol";
 
 contract FundMe {
 
