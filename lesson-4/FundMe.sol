@@ -21,6 +21,22 @@ contract FundMe {
 
     mapping(address => uint256) public addressToAmountFunded; // Mapping of addresses and how much money they actually sent.
 
+    // With our withdraw function, anyone could withdraw the funds from our contract.
+    // We need to set this up so that the withdraw function can only be called by the owner of this contract.
+    // To do that we have to set-up a couple new "functions": constructor
+    // When we deploy this contract, we want to set it up so that whoever deploys the contract is automatically going to be the owner of this contract.
+    // We could have used a new function to be executed once the contract is deployed but then we will have to pay for two transactions.
+    // Instead, Solidity has something called a constructor.
+    // Constructor is going to be the function that gets called immediately (same transaction as the deployment), whenever you deploy a contract.
+    
+    address public owner;
+    
+    constructor(){ // We can set it up so that we asign the owner of the contract. For that we need a global variable called "address public owner".
+        owner = msg.sender; // The msg.sender of the construction function is going to be whoever has deployed the contract.
+    }
+
+
+
     function fund() public payable { // This function is for people to send money to.
         // Just like wallet can hold funds, contract addresses can hold funds as well
         require(msg.value.getConversionRate() >= minimumUsd, "You need to send at least 1 Eth!"); 
