@@ -21,6 +21,10 @@ contract FundMe {
 
     mapping(address => uint256) public addressToAmountFunded; // Mapping of addresses and how much money they actually sent.
 
+
+
+
+
     function fund() public payable { // This function is for people to send money to.
         // Just like wallet can hold funds, contract addresses can hold funds as well
         require(msg.value.getConversionRate() >= minimumUsd, "You need to send at least 1 Eth!"); 
@@ -80,10 +84,58 @@ contract FundMe {
 
     NOTE: Everything inside the / * * / comment was originally part of this contract before we created the PriceConverter.sol library.
 */
-   // function withdraw(){
+    function withdraw() public { // for the owner of the contract to be able to withdraw the fudns.
+        // Since we are going to be withdrawing all the funds out of this contract, we would need to reset our funders Array and our addressToAmountFunded.
+        // To do that we will be using something called "for loop".
+        // A for loop is a way to loop through some type of index object or loop through some range of numbers or just do a task a certain amount of times, repeating.
+        // The for keyword initiates a loop. Then we define how we want the loop to run. The formula is: (Starting index; Ending index; Step amount).
+        // For example (0; 10; 1) we start with index 0, we go to 10 and we go up 1 at a time.
+        // Our starting index would be called funderIndex and it's gonna be equal to 0.
+        // We are going to end with the length of our funders array, since we wanna loop through all our funders.
+        // As a step, every time the loop finishes, we are going to increase the funderIndex by 1.
+        for (uint256 funderIndex = 0; funderIndex < funders.length; funderIndex++){ // funderIndex++ means funderIndex = funderIndex + 1
+            address funder = funders[funderIndex]; // To access the first (0) element of our funders object we gonna say funders[funderIndex] and this is gonna return an address for us to use, which we are putting inside the funder object.
+            addressToAmountFunded[funder] = 0; // Use funder to reset our mapping and our funded money back to zero.
+        }
 
-  //  } // for the owner of the contract to be able to withdraw the fudns.
+        funders = new address[](0); // Reset the funders array by creating a new address array with 0 objects in it.
 
-
+        /* To send Ether or any native blockhain currency, there are actually three different ways to do it.
+         * Transfer: msg.sender.transfer(address(this).balance); The "this" keyword refers to this whole contract.
+         *           That way we can get the native blockchain currency or the Ethereum currency balance of this address.
+         *           Only thing we need to do is to typecast msg.sender from an address type to a payable type.
+         *           We can do this by doing the following: payable(msg.sender).tranfer(address(this).balance;
+         *           msg.sender = is of type address
+         *           payable(msg.sender) = is of type payable address
+         *           In Solidity, in order to send the native blockchain token like Ethereum, you can only work with payable addresses.
+         *           The problem with this is that it has a cap transaction cost of 2300 gas and if it fails it returns an error and the transaction fails.
+         * Send:     Send on the other hand will not error. Instead it will return a boolean of whether or not it was successful.
+         *           payable(msg.sender).send(address(this).balance; <- We don't want to finish our call here. If this were to fail, the contract wouldn't revert the transaction.
+         *           So instead we want to do: bool sendSuccess = payable(msg.sender).tranfer(address(this).balance;
+         *                                     require(sendSucess, "Send failed");
+         *           This way, if this fails, we will still revert by adding our require statement.
+         * Call:     Call is going to be one of the first lower level commands that we actually use in our Solidity code.
+         *           This call function is actually very powerful as it can be used to call virtually any function in all of Ethereum, even without the API.
+         *           payable(msg.sender).call("");
+         *           Inside the call(...) is where we will put any function information that we want to call on some other contract.
+         *           In this case we don't want to call a function so we are going to leave this blank. We can show we are leaving it blank but putting "".
+         *           We instead want to use this as a transaction.
+         *           We can do that by adding the following: payable(msg.sender).call{value: address(this).balance}("");
+         *           This call function returns two variables and when the function returns two variables, we can show that by placing them inside brackets on the left hand side.
+         *           (bool callSuccess, bytes memory dataReturned) = payable(msg.sender).call{value: address(this).balance}("");
+         *           The two variables are going to be a boolean that we are going to call callSuccess and also a bytes object called dataReturned.
+         *           Since call is actually allowing us to call different functions, if that function returns some data or returns a value, we are going to save that in the dataReturned variable.
+         *           It also returns callSuccess, where if the function was successfully call this would be true and if not, this would be false.
+         *           Since bytes objects are arrays, data returned needs to be in memory.
+         *           In the case of our contract, since we are not calling any functions we will leave the second variable empty but with a comma, to show that we don't need a second variable: 
+         *           (bool callSuccess, ) = payable(msg.sender).call{value: address(this).balance}("");
+         *           require(callSuccess, "Call failed");
+         *           Similarly to the send function, we have to have a require statement so if it fails, it can be reverted.
+         *           As a general rule for now, call is the recommended way to actually send and receive Ethereum or any blockchain native token.
+         *           Call has no gas cap.
+        */
+        (bool callSuccess, ) = payable(msg.sender).call{value: address(this).balance}("");
+        require(callSuccess, "Call failed");
+    }
 
 }
