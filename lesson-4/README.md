@@ -45,3 +45,9 @@ For this lesson we were working with a contract named FundMe.sol and a library n
 <li>Chainlink Oracle Network
 <li>Metamask
 </ul>
+
+<br>
+<b>Tweaked Contract</b>
+
+Once we finished our contracts, we went over them and tweaked them so they would follow professional standards.
+The tweaked contracts can be found <a href="https://github.com/ans-sigalas/full-blockchain-solidity-course-js/tree/main/lesson-4/tweaked-contract">here</a>.
