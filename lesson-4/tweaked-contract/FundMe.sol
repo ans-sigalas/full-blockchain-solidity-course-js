@@ -1,7 +1,5 @@
 // SPDX-License-Identifier: MIT
 
-// gas = 845548
-
 /* Keywords: In Solidity there are two keywords that make it so that your variabless cannot be changed.
 *       Constant: If you assign a variable once outside of a function and then never change it, you can add the keyword "constant" to save gas.
 *                 Constant variables have a different naming convention and they typically they are all caps with underscores.
