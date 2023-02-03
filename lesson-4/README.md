@@ -49,5 +49,5 @@ For this lesson we were working with a contract named FundMe.sol and a library n
 <br>
 <b>Tweaked Contract</b>
 
-Once we finished our contracts, we went over them and tweaked them so they would follow professional standards.
-The tweaked contracts can be found <a href="https://github.com/ans-sigalas/full-blockchain-solidity-course-js/tree/main/lesson-4/tweaked-contract">here</a>.
+Once we finished our contracts, we went over the FundMe.sol contract and tweaked it so it would follow professional standards and be more gas efficient.
+The tweaked contract can be found <a href="https://github.com/ans-sigalas/full-blockchain-solidity-course-js/tree/main/lesson-4/tweaked-contract">here</a>.
