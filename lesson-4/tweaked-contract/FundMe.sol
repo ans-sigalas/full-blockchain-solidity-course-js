@@ -56,4 +56,34 @@ contract FundMe {
         _;
     }
 
+    // What happens if someone sends this contract ETH without calling the fund function?+
+    // There is actually a way for when people send money to this contract directly or call a function that doesn't exist, for us to still trigger some code.
+    // There are two special functions in Solidity:
+    // receive():  https://docs.soliditylang.org/en/latest/contracts.html#receive-ether-function
+    // fallback(): https://docs.soliditylang.org/en/latest/contracts.html#fallback-function
+
+    receive() external payable {
+        fund();
+    }
+
+    // receive() is a function but we don't have to add the function keyword for receive since Solidity knows that it is a special function.
+    // Whenever we send Ethereum or make a transaction to this contract now, as long as there is no data associated with that transaction, this receive function will get triggered.
+
+    fallback() external payable {
+        fund();
+    }
+
+    // This way, if someone sends money straight to the contract, we trigger the fund function.
+
+    // Explainer from: https://solidity-by-example.org/fallback/
+    // Ether is sent to contract
+    //      is msg.data empty?
+    //          /   \
+    //         yes  no
+    //        /       \
+    //   receive()?   fallback
+    //      /  \
+    //    yes   no
+    //    /      \
+    // receive()  fallback()
 }
