@@ -5,7 +5,8 @@ pragma solidity ^0.8.8;
 import "https://github.com/ans-sigalas/full-blockchain-solidity-course-js/blob/main/lesson-4/PriceConverter.sol";
 
 error NotOwner();
-error NeedMoreUsd();
+error YouNeedAtLeast50USD();
+error CallFailed();
 
 contract FundMe {
 
@@ -24,11 +25,10 @@ contract FundMe {
     }
 
     function fund() public payable {
-        //require(msg.value.getConversionRate() >= MINIMUM_USD, "You need to send at least 50 USD!");
-        if(msg.value.getConversionRate() <= MINIMUM_USD) {revert NeedMoreUsd();}
+        if(msg.value.getConversionRate() <= MINIMUM_USD) { revert YouNeedAtLeast50USD(); }
         funders.push(msg.sender);
         addressToAmountFunded[msg.sender] = msg.value;
-    } 
+    }
 
     function withdraw() public onlyOwner {
         for (uint256 funderIndex = 0; funderIndex < funders.length; funderIndex++){
@@ -38,8 +38,13 @@ contract FundMe {
 
         funders = new address[](0);
         (bool callSuccess, ) = payable(msg.sender).call{value: address(this).balance}("");
-        require(callSuccess, "Call failed");
+        //require(callSuccess, "Call failed");
+        if (!callSuccess) {
+            revert CallFailed();
+        }
     }
+
+
     
     modifier onlyOwner {
         //require(msg.sender == i_owner, "Sender is not the owner of this contract!");
