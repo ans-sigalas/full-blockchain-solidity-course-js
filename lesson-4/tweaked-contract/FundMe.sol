@@ -1,13 +1,5 @@
 // SPDX-License-Identifier: MIT
 
-/* Keywords: In Solidity there are two keywords that make it so that your variabless cannot be changed.
-*       Constant: If you assign a variable once outside of a function and then never change it, you can add the keyword "constant" to save gas.
-*                 Constant variables have a different naming convention and they typically they are all caps with underscores.
-*      Immutable: Variables that we only set one time but outside of the line they got declared (e.g. owner) we can mark as "immutable".
-*                 Immutable variables typically follow the naming convention of "i_".
-* Another thing we can do to optimise our contract is by updating our requirements. Right now, with our require statement we have to store a message as a string array.
-* Instead, we can create a custom error and then do an if statement where it is actually required.
-*/
 pragma solidity ^0.8.8;
 
 import "https://github.com/ans-sigalas/full-blockchain-solidity-course-js/blob/main/lesson-4/PriceConverter.sol";
@@ -32,9 +24,10 @@ contract FundMe {
     }
 
     function fund() public payable {
-        require(msg.value.getConversionRate() >= MINIMUM_USD, "You need to send at least 50 USD!");
+        //require(msg.value.getConversionRate() >= MINIMUM_USD, "You need to send at least 50 USD!");
+        if(msg.value.getConversionRate() <= MINIMUM_USD) {revert NeedMoreUsd();}
         funders.push(msg.sender);
-        addressToAmountFunded[msg.sender] += msg.value; // A += B is equivalent to A = A+B
+        addressToAmountFunded[msg.sender] = msg.value;
     } 
 
     function withdraw() public onlyOwner {
