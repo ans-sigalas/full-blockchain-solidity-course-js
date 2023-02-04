@@ -40,6 +40,12 @@
 
 async function main(){
     // http://127.0.0.1:7545
+    // If we visit Ethereum JSON-RPC Specification https://playground.open-rpc.org/?schemaUrl=https://raw.githubusercontent.com/ethereum/execution-apis/assembled-spec/openrpc.json&uiSchema%5BappBar%5D%5Bui:splitView%5D=false&uiSchema%5BappBar%5D%5Bui:input%5D=false&uiSchema%5BappBar%5D%5Bui:examplesDropdown%5D=false
+    // We can actually see different calls we can make directly to our node to get different information.
+    // We can make these API calls directly ourselves using an API End-Point like Axios or Fetch.
+    // However we are going to use a wrapper to interact with our node like Ethers.js
+    // Ethers.js is one of the most popular JavaScript based tooling kits that allows us to interact with different blockchains and has all these wrappers that make all these API calls with Ethereum and other EVM compatible blockchains.
+    // 
 }
 
 main(){
