@@ -78,6 +78,15 @@ async function main() {
     "./SimpleStorage_sol_SimpleStorage.bin",
     "utf8"
   );
+
+  // Now that we have the BIN and the ABI we can create something called a contract factory.
+  // In ethers a contract factory is just an object that you can use to deploy contracts.
+  // Below we call the contract factory object.
+  const contractFactory = new ethers.contractFactory(abi, binary, wallet);
+  // We passed the abi so that our code knows how to interact with contract.
+  // We passed the binary because this is the main compiled code in our wallet so that we have a private key we can use to sign while deploying this contract.
+
+  console.log("Deploying, please wait...");
 }
 
 main()
