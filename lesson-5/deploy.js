@@ -47,6 +47,7 @@ async function main(){
     // Ethers.js is one of the most popular JavaScript based tooling kits that allows us to interact with different blockchains and has all these wrappers that make all these API calls with Ethereum and other EVM compatible blockchains.
     // Web3.js is another popular package that does the same thing.
     // The reason why we are using Ethers is that it is the main tool that powers the hardhat environment.
+    // To install it we can do $ yarn add ethers
 }
 
 main(){
