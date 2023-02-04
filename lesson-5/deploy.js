@@ -87,6 +87,11 @@ async function main() {
   // We passed the binary because this is the main compiled code in our wallet so that we have a private key we can use to sign while deploying this contract.
 
   console.log("Deploying, please wait...");
+
+  // We can now deploy this contract with ethers with the following:
+  const contract = await contractFactory.deploy(); // This tells our code to stop here and wait for contract to be deployed.
+
+  console.log(contract);
 }
 
 main()
