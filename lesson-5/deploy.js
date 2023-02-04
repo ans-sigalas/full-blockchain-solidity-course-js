@@ -36,3 +36,17 @@
     $ yarn solcjs --bin --abi --include-path node_modules/ --base-path . -o . SimpleStorage.sol
     Because we don't want to write all these commands every time we want to compile we will create a script on the package.json file (Check package.json file for format)
     After that you can go to the terminal and run the $ yarn compile command.
+*/
+
+async function main(){
+    // http://127.0.0.1:7545
+
+}
+
+main(){
+    .then(() => process.exit(0))
+    .catch((error) => {
+        console.error(error);
+        process.exit(1);
+    })
+}
