@@ -22,7 +22,10 @@ contract SimpleStorage {
         return favoriteNumber;
     }
 
-    function addPerson(string memory _name, uint256 _favoriteNumber) public virtual{
+    function addPerson(
+        string memory _name,
+        uint256 _favoriteNumber
+    ) public virtual {
         people.push(People(_favoriteNumber, _name));
         nameToFavoriteNumber[_name] = _favoriteNumber;
     }
