@@ -38,17 +38,37 @@
     After that you can go to the terminal and run the $ yarn compile command.
 */
 
+/*  Notes about Ethers
+    If we visit Ethereum JSON-RPC Specification https://playground.open-rpc.org/?schemaUrl=https://raw.githubusercontent.com/ethereum/execution-apis/assembled-spec/openrpc.json&uiSchema%5BappBar%5D%5Bui:splitView%5D=false&uiSchema%5BappBar%5D%5Bui:input%5D=false&uiSchema%5BappBar%5D%5Bui:examplesDropdown%5D=false
+    We can actually see different calls we can make directly to our node to get different information.
+    We can make these API calls directly ourselves using an API End-Point like Axios or Fetch.
+    However we are going to use a wrapper to interact with our node like Ethers.js
+    Ethers.js is one of the most popular JavaScript based tooling kits that allows us to interact with different blockchains and has all these wrappers that make all these API calls with Ethereum and other EVM compatible blockchains.
+    Web3.js is another popular package that does the same thing.
+    The reason why we are using Ethers is that it is the main tool that powers the hardhat environment.
+    To install it we can do $ yarn add ethers
+*/
+
+// Import dependencies and external packages
+const ethers = require("ethers"); // const similar to let. const makes it so ethers variable cannot be changed. require is a function to import ethers package
+const fs = require("fs-extra"); // To install package we need to run $ yarn add fs-extra
+
 async function main() {
-  // http://127.0.0.1:7545
-  // If we visit Ethereum JSON-RPC Specification https://playground.open-rpc.org/?schemaUrl=https://raw.githubusercontent.com/ethereum/execution-apis/assembled-spec/openrpc.json&uiSchema%5BappBar%5D%5Bui:splitView%5D=false&uiSchema%5BappBar%5D%5Bui:input%5D=false&uiSchema%5BappBar%5D%5Bui:examplesDropdown%5D=false
-  // We can actually see different calls we can make directly to our node to get different information.
-  // We can make these API calls directly ourselves using an API End-Point like Axios or Fetch.
-  // However we are going to use a wrapper to interact with our node like Ethers.js
-  // Ethers.js is one of the most popular JavaScript based tooling kits that allows us to interact with different blockchains and has all these wrappers that make all these API calls with Ethereum and other EVM compatible blockchains.
-  // Web3.js is another popular package that does the same thing.
-  // The reason why we are using Ethers is that it is the main tool that powers the hardhat environment.
-  // To install it we can do $ yarn add ethers
+  // http://127.0.0.1:7545 <- Ganache RPC Server
+  // Below is our connection to the blockchain
+  const provider = new ethers.providers.JsonRpcProvider( // We say that we are going to connect to the url inside the bracket.
+    "http://127.0.0.1:7545"
+  );
+  //Below is our wallet
+  const wallet = new ethers.Wallet( // Import new wallet from ganache
+    "7e160c74c690c09c2da47f52004c9476e72a01d952893281302c6d2443fb9b2c", // private key | Of note: Pasting your private key directly into your code is a no-no. We will learn to avoid it in the future.
+    provider
+  );
 }
+
+// In order to deploy our contract we are going to need the ABI and the BIN codes of the contract.
+// For that, we need to read from the two files that we created previously.
+// To do that, we need to use a package called "fs".
 
 main()
   .then(() => process.exit(0))
