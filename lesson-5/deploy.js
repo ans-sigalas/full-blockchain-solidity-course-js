@@ -57,13 +57,13 @@ async function main() {
   // http://127.0.0.1:7545 <- Ganache RPC Server
 
   // Below is our connection to the blockchain
-  const provider = new ethers.providers.JsonRpcProvider( // We say that we are going to connect to the url inside the bracket.
+  const provider = new ethers.providers.JsonRpcProvider(
     "http://127.0.0.1:7545"
-  );
+  ); // We say that we are going to connect to the url inside the bracket.
 
   //Below is our wallet
   const wallet = new ethers.Wallet( // Import new wallet from ganache
-    "7e160c74c690c09c2da47f52004c9476e72a01d952893281302c6d2443fb9b2c", // private key | Of note: Pasting your private key directly into your code is a no-no. We will learn to avoid it in the future.
+    "696d378a912887469b222526b35745ad3e081fe389610ee67634a4fdd302a032", // private key | Of note: Pasting your private key directly into your code is a no-no. We will learn to avoid it in the future.
     provider
   );
 
