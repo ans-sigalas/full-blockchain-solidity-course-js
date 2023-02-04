@@ -55,20 +55,30 @@ const fs = require("fs-extra"); // To install package we need to run $ yarn add 
 
 async function main() {
   // http://127.0.0.1:7545 <- Ganache RPC Server
+
   // Below is our connection to the blockchain
   const provider = new ethers.providers.JsonRpcProvider( // We say that we are going to connect to the url inside the bracket.
     "http://127.0.0.1:7545"
   );
+
   //Below is our wallet
   const wallet = new ethers.Wallet( // Import new wallet from ganache
     "7e160c74c690c09c2da47f52004c9476e72a01d952893281302c6d2443fb9b2c", // private key | Of note: Pasting your private key directly into your code is a no-no. We will learn to avoid it in the future.
     provider
   );
-}
 
-// In order to deploy our contract we are going to need the ABI and the BIN codes of the contract.
-// For that, we need to read from the two files that we created previously.
-// To do that, we need to use a package called "fs".
+  // In order to deploy our contract we are going to need the ABI and the BIN codes of the contract.
+  // For that, we need to read from the two files that we created previously.
+  // To do that, we need to use a package called "fs".
+  // Below we call the ABI.
+  const abi = fs.readFileSync("./SimpleStorage_sol_SimpleStorage.abi", "utf8");
+
+  // Below we call the BIN.
+  const binary = fs.readFileSync(
+    "./SimpleStorage_sol_SimpleStorage.bin",
+    "utf8"
+  );
+}
 
 main()
   .then(() => process.exit(0))
