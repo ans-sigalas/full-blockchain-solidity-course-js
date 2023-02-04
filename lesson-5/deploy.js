@@ -31,4 +31,7 @@
 */
 
 /*  Notes for deploy.js
-    With this file we are trying to replicate whatever was happening inside remix.
+    With this file we are trying to replicate whatever was happening inside Remix IDE.
+    If we want to compile the contract SimpleStorage we need to write the following on the terminal, where the yarn is installed.
+    $ yarn solcjs --bin --abi --include-path node_modules/ --base-path . -o . SimpleStorage.sol
+    Because we don't want to write all these commands every time we want to compile we will create a script on the package.json file (Check package.json file for format)
