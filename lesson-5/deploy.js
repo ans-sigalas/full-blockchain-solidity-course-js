@@ -63,7 +63,7 @@ async function main() {
 
   //Below is our wallet
   const wallet = new ethers.Wallet( // Import new wallet from ganache
-    "696d378a912887469b222526b35745ad3e081fe389610ee67634a4fdd302a032", // private key | Of note: Pasting your private key directly into your code is a no-no. We will learn to avoid it in the future.
+    "9897630a9443992fbe167de27b7536cd59a37b90b821018a5dd67e2a55a67f58", // private key | Of note: Pasting your private key directly into your code is a no-no. We will learn to avoid it in the future.
     provider
   );
 
