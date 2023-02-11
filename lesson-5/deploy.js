@@ -101,7 +101,7 @@ async function main() {
   // For that we have to run the following:
   console.log("Here is the deployment transaction:");
   console.log(contract.deployTransaction);
-  console.log("Here is the deployment receipt:");
+  console.log("Here is the transaction receipt:");
   console.log(deploymentReceipt);
   // console.log(contract);
 }
