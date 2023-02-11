@@ -90,8 +90,18 @@ async function main() {
 
   // We can now deploy this contract with ethers with the following:
   const contract = await contractFactory.deploy(); // This tells our code to stop here and wait for contract to be deployed.
+  // If we want to add some specifics about our contract deployment like gas price, gas limit, etc. we have to use the override function which can be found within our "deploy" definition.
+  // We can find the contractFactory.deploy(); override by pressing CTRL + click on the "deploy" function.
+  // This will take us into the function so we can see anything about this function (e.g., how it's defined, etc. )
+  // We can add overrides in our deploy function by doing the following: const contract = await contractFactory.deploy({gasLimit:100000}); / gasLimit was an example
+  // Another thing we can do is we can wait a certain amount of blocks to make sure that it will actually get attached to the chain.
+  // We can do that by doing the following:
+  const deploymentReceipt = await contract.deployTransaction.wait(1);
+  // This way we specified that we want to wait 1 block for confirmation.
+  // For that we have to run the following:
+  console.log(deploymentReceipt);
 
-  console.log(contract);
+  // console.log(contract);
 }
 
 main()
