@@ -96,13 +96,13 @@ async function main() {
   // We can add overrides in our deploy function by doing the following: const contract = await contractFactory.deploy({gasLimit:100000}); / gasLimit was an example
   // Another thing we can do is we can wait a certain amount of blocks to make sure that it will actually get attached to the chain.
   // We can do that by doing the following:
-  const deploymentReceipt = await contract.deployTransaction.wait(1);
+  const transactionReceipt = await contract.deployTransaction.wait(1);
   // This way we specified that we want to wait 1 block for confirmation.
   // For that we have to run the following:
   console.log("Here is the deployment transaction:");
   console.log(contract.deployTransaction);
   console.log("Here is the transaction receipt:");
-  console.log(deploymentReceipt);
+  console.log(transactionReceipt);
   // console.log(contract);
 }
 
