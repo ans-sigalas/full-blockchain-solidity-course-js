@@ -63,12 +63,24 @@ async function main() {
     process.env.RPC_URL
   ); // We say that we are going to connect to the url inside the bracket.
 
-  //Below is our wallet
-  const wallet = new ethers.Wallet( // Import new wallet from ganache
-    // "b26801e16b664597d257e9eb5813b5da3c1521c618850be463cea3de692c3b9f", // private key | Of note: Pasting your private key directly into your code is a no-no. We will learn to avoid it in the future.
-    process.env.PRIVATE_KEY,
-    provider
+  // Now that we have an encrypted key we can pass it instead of using const wallet like below.
+  const encryptedJson = fs.readFileSync("./.encryptedKey.json", "utf-8");
+  // Then we are going to create a wallet from this encrypted key.
+  let wallet = new ethers.Wallet.fromEncryptedJsonSync( // The reason we used let is to connect our wallet back to our provider.
+    encryptedJson,
+    process.env.PRIVATE_KEY_PASSWORD
   );
+  wallet = await wallet.connect(provider); // To connect our wallet to the provider.
+
+  // Now, to run our deploy.js we need to say $ PRIVATE_KEY_PASSWORD=password node deploy.js
+
+  //Below is our wallet
+  // const wallet = new ethers.Wallet( // Import new wallet from ganache
+  //   // "b26801e16b664597d257e9eb5813b5da3c1521c618850be463cea3de692c3b9f", // private key | Of note: Pasting your private key directly into your code is a no-no. We will learn to avoid it in the future.
+  //   // To be even more secure, we will encrypt our private key using a script inside a file called "encryptKey.js"
+  //   process.env.PRIVATE_KEY,
+  //   provider
+  // );
   // If we were to push the online, people would be able to see our private key.
   // One way to avoid that is by using a .env file or an "Environment Variable Fine".
   // We can set this variables on our terminal but for now we are going to set them in a .env file.
