@@ -52,20 +52,31 @@
 // Import dependencies and external packages
 const ethers = require("ethers"); // const similar to let. const makes it so ethers variable cannot be changed. require is a function to import ethers package
 const fs = require("fs-extra"); // To install package we need to run $ yarn add fs-extra
+require("dotenv").config(); // To call the dotenv tool.
 
 async function main() {
   // http://127.0.0.1:7545 <- Ganache RPC Server
 
   // Below is our connection to the blockchain
   const provider = new ethers.providers.JsonRpcProvider(
-    "http://127.0.0.1:7545"
+    // "http://127.0.0.1:7545" This is not actually something that we need to secure, however, maybe we would like to use an API key or a certain endpoint that only we want to have access to.
+    process.env.RPC_URL
   ); // We say that we are going to connect to the url inside the bracket.
 
   //Below is our wallet
   const wallet = new ethers.Wallet( // Import new wallet from ganache
-    "b26801e16b664597d257e9eb5813b5da3c1521c618850be463cea3de692c3b9f", // private key | Of note: Pasting your private key directly into your code is a no-no. We will learn to avoid it in the future.
+    // "b26801e16b664597d257e9eb5813b5da3c1521c618850be463cea3de692c3b9f", // private key | Of note: Pasting your private key directly into your code is a no-no. We will learn to avoid it in the future.
+    process.env.PRIVATE_KEY,
     provider
   );
+  // If we were to push the online, people would be able to see our private key.
+  // One way to avoid that is by using a .env file or an "Environment Variable Fine".
+  // We can set this variables on our terminal but for now we are going to set them in a .env file.
+  // .env is a file where we will store sensitive information and we are never going to share with anybody.
+  // This .env file will choose variables of our choosing into the environment of our code.
+  // Of note regarding the .env file: Some tools might need a "0x" in front of our private key, but ethers and hardhat don't.
+  // To be able to grab our private key from the .env file and put it on our deploy.js file, we have to download a tool called dotenv.
+  // We do that by running $yarn add dotenv
 
   // In order to deploy our contract we are going to need the ABI and the BIN codes of the contract.
   // For that, we need to read from the two files that we created previously.
