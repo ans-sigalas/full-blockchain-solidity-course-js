@@ -96,14 +96,26 @@ async function main() {
   // We can add overrides in our deploy function by doing the following: const contract = await contractFactory.deploy({gasLimit:100000}); / gasLimit was an example
   // Another thing we can do is we can wait a certain amount of blocks to make sure that it will actually get attached to the chain.
   // We can do that by doing the following:
-  const transactionReceipt = await contract.deployTransaction.wait(1);
+  await contract.deployTransaction.wait(1);
   // This way we specified that we want to wait 1 block for confirmation.
   // For that we have to run the following:
-  console.log("Here is the deployment transaction:");
-  console.log(contract.deployTransaction);
-  console.log("Here is the transaction receipt:");
-  console.log(transactionReceipt);
+  // console.log("Here is the deployment transaction: ");
+  // console.log(contract.deployTransaction);
+  // console.log("Here is the transaction receipt: ");
+  // console.log(transactionReceipt);
   // console.log(contract);
+
+  const currentFavoriteNumber = await contract.retrieve(); // To retrieve our favorite number.
+  // console.log("Here is the current favorite number: ");
+  // console.log(currentFavoriteNumber.toString());
+  // Instead of the above, we can make it more syntactical correct by using something called string interpolation, to interpolate our string with variables.
+  // Typically for JavaScript strings we use double quotes "" but if we want to include variables with strings we can use backticks `` instead (located next to button 1).
+  // ${} means that it includes a function.
+  console.log(`Current Favorite Number: ${currentFavoriteNumber.toString()}`);
+  const transactionResponse = await contract.store("7");
+  const transactionReceipt = await transactionResponse.wait(1);
+  const updatedFavoriteNumber = await contract.retrieve();
+  console.log(`Updated Favorite Number: ${updatedFavoriteNumber}`);
 }
 
 main()
