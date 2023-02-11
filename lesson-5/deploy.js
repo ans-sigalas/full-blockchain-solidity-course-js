@@ -73,6 +73,7 @@ async function main() {
   wallet = await wallet.connect(provider); // To connect our wallet to the provider.
 
   // Now, to run our deploy.js we need to say $ PRIVATE_KEY_PASSWORD=password node deploy.js
+  // Then we run $ history -c to clear our history because someone can find our password from our terminal history
 
   //Below is our wallet
   // const wallet = new ethers.Wallet( // Import new wallet from ganache
