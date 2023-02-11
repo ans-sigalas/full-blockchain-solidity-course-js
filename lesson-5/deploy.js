@@ -63,7 +63,7 @@ async function main() {
 
   //Below is our wallet
   const wallet = new ethers.Wallet( // Import new wallet from ganache
-    "9897630a9443992fbe167de27b7536cd59a37b90b821018a5dd67e2a55a67f58", // private key | Of note: Pasting your private key directly into your code is a no-no. We will learn to avoid it in the future.
+    "b26801e16b664597d257e9eb5813b5da3c1521c618850be463cea3de692c3b9f", // private key | Of note: Pasting your private key directly into your code is a no-no. We will learn to avoid it in the future.
     provider
   );
 
@@ -99,8 +99,10 @@ async function main() {
   const deploymentReceipt = await contract.deployTransaction.wait(1);
   // This way we specified that we want to wait 1 block for confirmation.
   // For that we have to run the following:
+  console.log("Here is the deployment transaction:");
+  console.log(contract.deployTransaction);
+  console.log("Here is the deployment receipt:");
   console.log(deploymentReceipt);
-
   // console.log(contract);
 }
 
