@@ -62,15 +62,15 @@ async function main() {
         // "http://127.0.0.1:7545" This is not actually something that we need to secure, however, maybe we would like to use an API key or a certain endpoint that only we want to have access to.
         process.env.RPC_URL
     ) // We say that we are going to connect to the url inside the bracket.
-
+    const wallet = new ethers.Wallet(process.env.PRIVATE_KEY, provider)
     // Now that we have an encrypted key we can pass it instead of using const wallet like below.
-    const encryptedJson = fs.readFileSync("./.encryptedKey.json", "utf-8")
+    // const encryptedJson = fs.readFileSync("./.encryptedKey.json", "utf-8")
     // Then we are going to create a wallet from this encrypted key.
-    let wallet = new ethers.Wallet.fromEncryptedJsonSync( // The reason we used let is to connect our wallet back to our provider.
-        encryptedJson,
-        process.env.PRIVATE_KEY_PASSWORD
-    )
-    wallet = await wallet.connect(provider) // To connect our wallet to the provider.
+    // let wallet = new ethers.Wallet.fromEncryptedJsonSync( // The reason we used let is to connect our wallet back to our provider.
+    //     encryptedJson,
+    //     process.env.PRIVATE_KEY_PASSWORD
+    // )
+    // wallet = await wallet.connect(provider) // To connect our wallet to the provider.
 
     // Now, to run our deploy.js we need to say $ PRIVATE_KEY_PASSWORD=password node deploy.js
     // Then we run $ history -c to clear our history because someone can find our password from our terminal history
@@ -120,7 +120,8 @@ async function main() {
     // We can add overrides in our deploy function by doing the following: const contract = await contractFactory.deploy({gasLimit:100000}); / gasLimit was an example
     // Another thing we can do is we can wait a certain amount of blocks to make sure that it will actually get attached to the chain.
     // We can do that by doing the following:
-    await contract.deployTransaction.wait(1)
+    // await contract.deployTransaction.wait(1)
+    const deploymentReceipt = await contract.deployTransaction.wait(1)
     // This way we specified that we want to wait 1 block for confirmation.
     // For that we have to run the following:
     // console.log("Here is the deployment transaction: ");
