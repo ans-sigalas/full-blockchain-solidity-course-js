@@ -128,6 +128,8 @@ async function main() {
     // console.log("Here is the transaction receipt: ");
     // console.log(transactionReceipt);
     // console.log(contract);
+    console.log(`Contract Address: ${contract.address}`)
+    // We added a console.log under our contract deployment so we will now which address is at
 
     const currentFavoriteNumber = await contract.retrieve() // To retrieve our favorite number.
     // console.log("Here is the current favorite number: ");
