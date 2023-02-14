@@ -15,7 +15,7 @@ async function main() {
     console.log(network.config)
     // If we are deploying on a testnet (Goerli in this instance), this verifies our contract on Etherscan
     if (network.config.chainId === 5 && process.env.ETHERSCAN_API_KEY) {
-      console.log("Waiting for block txes...")
+        console.log("Waiting for block txes...")
         await simpleStorage.deployTransaction.wait(6) // wait 6 blocks
         await verify(simpleStorage.address, [])
     }
@@ -36,7 +36,7 @@ async function verify(contractAddress, args) {
     console.log("Verifying contract...")
     try {
         await run("verify:verify", {
-            address: contractAddress,W
+            address: contractAddress,
             constructorArguments: args,
         })
     } catch (e) {
