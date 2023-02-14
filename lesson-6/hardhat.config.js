@@ -11,7 +11,7 @@ module.exports = {
     networks: {
         goerli: {
             url: GOERLI_RPC_URL,
-            account: [],
+            account: [PRIVATE_KEY],
         },
     },
     solidity: "0.8.7",
