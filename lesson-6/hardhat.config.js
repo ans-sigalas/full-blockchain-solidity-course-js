@@ -12,6 +12,7 @@ module.exports = {
         goerli: {
             url: GOERLI_RPC_URL,
             account: [PRIVATE_KEY],
+            chainId: 5,
         },
     },
     solidity: "0.8.7",
