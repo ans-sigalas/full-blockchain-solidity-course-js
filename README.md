@@ -5,10 +5,10 @@ This is a repository for the aforementioned course on Blockchain & Solidity, usi
 <b>Lessons</b> of this course include the following:
 <ul>
   <li>Lesson 1: Blockchain Basics
-  <li><a href="https://github.com/ans-sigalas/full-blockchain-solidity-course-js/tree/main/lesson-2">Lesson 2: Welcome to Remix! Simple Storage</a>
-  <li><a href="https://github.com/ans-sigalas/full-blockchain-solidity-course-js/tree/main/lesson-3">Lesson 3: Remix Storage Factory</a>
+  <li><a href="https://github.com/ans-sigalas/full-blockchain-solidity-course-js/tree/main/lesson-2">Lesson 2: Welcome to Remix! Simple Storage
+  <li><a href="https://github.com/ans-sigalas/full-blockchain-solidity-course-js/tree/main/lesson-3">Lesson 3: Remix Storage Factory
   <li><a href="https://github.com/ans-sigalas/full-blockchain-solidity-course-js/tree/main/lesson-4">Lesson 4: Remix Fund Me
-  <li>Lesson 5: Ethers.js Simple Storage
+  <li><a href="https://github.com/ans-sigalas/full-blockchain-solidity-course-js/tree/main/lesson-5">Lesson 5: Ethers.js Simple Storage
   <li>Lesson 6: Hardhat Simple Storage
   <li>Lesson 7: Hardhat Fund Me
   <li>Lesson 8: HTML / Javascript Fund Me (Full Stack / Front End)
