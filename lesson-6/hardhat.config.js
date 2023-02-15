@@ -30,5 +30,6 @@ module.exports = {
         noColors: true,
         currency: "USD",
         coinmarketcap: COINMARKETCAP_API_KEY,
+        // token: "MATIC", if we wanted to see how much money it would cost to deploy in Polygon
     },
 }
