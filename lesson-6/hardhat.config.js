@@ -25,5 +25,6 @@ module.exports = {
     },
     gasReporter: {
         enabled: true,
+        outputFile: "gas-report.txt",
     },
 }
